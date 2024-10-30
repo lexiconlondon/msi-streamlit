@@ -47,9 +47,9 @@ fig, ax = plt.subplots(figsize=(14, 10))
 for i, (sector, y_pos) in enumerate(zip(sector_df.index, y_positions)):
     for j, category in enumerate(sector_df.columns):
         ax.scatter(j, y_pos,
-                   s=sector_df.loc[sector, category] * 10,  # Scale for bubble size
+                   s=sector_df.loc[sector, category] * 20,  # Scale for bubble size
                    color=color_discrete_sequence[i % len(color_discrete_sequence)],  # Color for each sector
-                   alpha=0.6,
+                   alpha=1,
                    edgecolor='black',
                    marker='o')  # Circular marker
 
