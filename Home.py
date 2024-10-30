@@ -1,4 +1,4 @@
-import streamlit as st
+oimport streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib.font_manager as fm
@@ -32,7 +32,7 @@ data = {
 
 # Create DataFrame
 likelihood_df = pd.DataFrame(data)
-likelihood_df.set_index("Country", inplace=True)
+likelihood_df.set_index("Sector", inplace=True)
 
 # Define color palette for each country (in reverse order)
 color_discrete_sequence = [
