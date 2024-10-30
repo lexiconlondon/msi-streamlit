@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
+import matplotlib.font_manager as fm
 
 config = {
   'toImageButtonOptions': {
@@ -11,6 +12,10 @@ config = {
     'scale': 1 # Multiply title/legend/axis/canvas sizes by this factor
   }
 }
+
+# Load the Inter font
+font_path = 'Inter-Regular.ttf'  # Update path if different
+inter_font = fm.FontProperties(fname=font_path)
 
 # Define the data
 data = {
@@ -39,27 +44,27 @@ fig, ax = plt.subplots(figsize=(14, 10))
 for i, (country, y_pos) in enumerate(zip(likelihood_df.index, y_positions)):
     for j, category in enumerate(likelihood_df.columns):
         ax.scatter(j, y_pos,
-                   s=likelihood_df.loc[country, category] * 50,  # Scale for bubble size
+                   s=likelihood_df.loc[country, category] * 10,  # Scale for bubble size
                    color=color_discrete_sequence[i % len(color_discrete_sequence)],  # Reversed color order
-                   alpha=1,
+                   alpha=0.6,
                    edgecolor='black',
                    marker='o')  # Circular marker
 
-        # Add percentage text next to each bubble
+        # Add percentage text next to each bubble with Inter font
         percentage_text = f"{likelihood_df.loc[country, category]}%"
-        ax.text(j + 0.15, y_pos, percentage_text, ha='left', va='center', color='black', fontsize=10)
+        ax.text(j + 0.15, y_pos, percentage_text, ha='left', va='center', color='black', fontsize=10, fontproperties=inter_font)
 
-# Customize plot appearance
+# Customize plot appearance with Inter font for labels
 ax.set_yticks(y_positions)
-ax.set_yticklabels(likelihood_df.index)
+ax.set_yticklabels(likelihood_df.index, fontproperties=inter_font)
 ax.set_xticks(range(len(likelihood_df.columns)))
-ax.set_xticklabels(likelihood_df.columns, rotation=45, ha='center')
+ax.set_xticklabels(likelihood_df.columns, rotation=45, ha='center', fontproperties=inter_font)
 ax.spines[:].set_visible(False)  # Hide all spines
 ax.grid(False)  # Turn off grid
 ax.set_xlabel("")
 ax.set_ylabel("")
 
 # Display the chart in Streamlit
-#st.pyplot(fig)
+
 st.plotly_chart(fig,config=config)
                           
