@@ -19,12 +19,13 @@ inter_font = fm.FontProperties(fname=font_path)
 
 # Define the data
 data = {
-    "Country": ["Canada", "Russia", "France", "UK", "India", "Germany", "Japan", "China", "US"],
-    "Very Unlikely": [5, 64, 3, 5, 52, 4, 3, 46, 26],
-    "Somewhat Unlikely": [19, 24, 19, 30, 29, 18, 19, 23, 35],
-    "Somewhat Likely": [50, 6, 55, 47, 13, 42, 47, 21, 30],
-    "Very Likely": [23, 2, 20, 15, 3, 34, 29, 8, 6]
+    "Country": ["US", "China", "Japan", "Germany", "India", "UK", "France", "Russia", "Canada"],
+    "Very Unlikely": [13, 28, 4, 3, 39, 6, 3, 52, 4],
+    "Somewhat Unlikely": [30, 28, 11, 15, 37, 21, 17, 32, 14],
+    "Somewhat Likely": [36, 28, 42, 40, 18, 46, 49, 10, 44],
+    "Very Likely": [19, 15, 42, 42, 4, 27, 29, 3, 36]
 }
+
 
 # Create DataFrame
 likelihood_df = pd.DataFrame(data)
