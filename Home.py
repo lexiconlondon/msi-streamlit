@@ -19,11 +19,14 @@ inter_font = fm.FontProperties(fname=font_path)
 
 # Define the data
 data = {
-    "Country": ["US", "China", "Japan", "Germany", "India", "UK", "France", "Russia", "Canada"],
-    "Very Unlikely": [13, 28, 4, 3, 39, 6, 3, 52, 4],
-    "Somewhat Unlikely": [30, 28, 11, 15, 37, 21, 17, 32, 14],
-    "Somewhat Likely": [36, 28, 42, 40, 18, 46, 49, 10, 44],
-    "Very Likely": [19, 15, 42, 42, 4, 27, 29, 3, 36]
+    "Sector": [
+        "Oil and Gas", "Utilities", "Industrials", "Aviation", "Marine Transportation",
+        "Land Transportation", "Consumer Goods", "Consumer Staples (Food/Household Goods etc.)", "Real Estate"
+    ],
+    "Very Unlikely": [70, 37, 59, 56, 48, 48, 29, 0, 34],
+    "Somewhat Unlikely": [23, 41, 32, 29, 38, 39, 49, 0, 47],
+    "Somewhat Likely": [5, 19, 6, 11, 8, 11, 16, 0, 14],
+    "Very Likely": [2, 3, 3, 5, 6, 3, 7, 0, 6]
 }
 
 
