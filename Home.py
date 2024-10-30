@@ -2,6 +2,16 @@ import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
 
+config = {
+  'toImageButtonOptions': {
+    'format': 'svg', # one of png, svg, jpeg, webp
+    'filename': 'custom_image',
+    'height': 500,
+    'width': 900,
+    'scale': 1 # Multiply title/legend/axis/canvas sizes by this factor
+  }
+}
+
 # Define the data
 data = {
     "Country": ["Canada", "Russia", "France", "UK", "India", "Germany", "Japan", "China", "US"],
@@ -50,6 +60,6 @@ ax.set_xlabel("")
 ax.set_ylabel("")
 
 # Display the chart in Streamlit
-st.pyplot(fig)
-
+#st.pyplot(fig)
+st.plotly_chart(fig,config=config)
                           
