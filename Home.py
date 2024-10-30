@@ -17,7 +17,7 @@ config = {
 font_path = 'Inter-Regular.ttf'  # Update path if different
 inter_font = fm.FontProperties(fname=font_path)
 
-# Define the data
+# Define the new data based on the provided table
 data = {
     "Sector": [
         "Oil and Gas", "Utilities", "Industrials", "Aviation", "Marine Transportation",
@@ -29,40 +29,39 @@ data = {
     "Very Likely": [2, 3, 3, 5, 6, 3, 7, 0, 6]
 }
 
-
 # Create DataFrame
-likelihood_df = pd.DataFrame(data)
-likelihood_df.set_index("Sector", inplace=True)
+sector_df = pd.DataFrame(data)
+sector_df.set_index("Sector", inplace=True)
 
-# Define color palette for each country (in reverse order)
+# Define color palette for each sector
 color_discrete_sequence = [
-    '#0f477b', '#7188ef', '#aebaf0', '#00c4b3', '#118a5e', '#C12D8F', '#000000', '#f08900', '#ffc62d'
+    '#ffc62d', '#f08900', '#000000', '#C12D8F', '#118a5e', '#00c4b3', '#aebaf0', '#7188ef', '#0f477b'
 ]
 
-# Set y-axis positions for plotting with "US" at the top
-y_positions = [i * 2.5 for i in range(len(likelihood_df.index))][::-1]  # Reverse order for top-down
+# Set y-axis positions for plotting, reversing order to have Oil and Gas at the top
+y_positions = [i * 2.5 for i in range(len(sector_df.index))][::-1]  # Reverse order for top-down
 
-# Create the bubble chart in Matplotlib
+# Create the bubble chart
 fig, ax = plt.subplots(figsize=(14, 10))
 
-for i, (country, y_pos) in enumerate(zip(likelihood_df.index, y_positions)):
-    for j, category in enumerate(likelihood_df.columns):
+for i, (sector, y_pos) in enumerate(zip(sector_df.index, y_positions)):
+    for j, category in enumerate(sector_df.columns):
         ax.scatter(j, y_pos,
-                   s=likelihood_df.loc[country, category] * 20,  # Scale for bubble size
-                   color=color_discrete_sequence[i % len(color_discrete_sequence)],  # Reversed color order
-                   alpha=1,
+                   s=sector_df.loc[sector, category] * 10,  # Scale for bubble size
+                   color=color_discrete_sequence[i % len(color_discrete_sequence)],  # Color for each sector
+                   alpha=0.6,
                    edgecolor='black',
                    marker='o')  # Circular marker
 
-        # Add percentage text next to each bubble with Inter font
-        percentage_text = f"{likelihood_df.loc[country, category]}%"
-        ax.text(j + 0.15, y_pos, percentage_text, ha='left', va='center', color='black', fontsize=10, fontproperties=inter_font)
+        # Add percentage text next to each bubble
+        percentage_text = f"{sector_df.loc[sector, category]}%"
+        ax.text(j + 0.15, y_pos, percentage_text, ha='left', va='center', color='black', fontsize=10)
 
-# Customize plot appearance with Inter font for labels
+# Customize plot appearance
 ax.set_yticks(y_positions)
-ax.set_yticklabels(likelihood_df.index, fontproperties=inter_font)
-ax.set_xticks(range(len(likelihood_df.columns)))
-ax.set_xticklabels(likelihood_df.columns, rotation=45, ha='center', fontproperties=inter_font)
+ax.set_yticklabels(sector_df.index)
+ax.set_xticks(range(len(sector_df.columns)))
+ax.set_xticklabels(sector_df.columns, rotation=45, ha='center')
 ax.spines[:].set_visible(False)  # Hide all spines
 ax.grid(False)  # Turn off grid
 ax.set_xlabel("")
