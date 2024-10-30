@@ -55,7 +55,7 @@ for i, (sector, y_pos) in enumerate(zip(sector_df.index, y_positions)):
 
         # Add percentage text next to each bubble
         percentage_text = f"{sector_df.loc[sector, category]}%"
-        ax.text(j + 0.15, y_pos, percentage_text, ha='left', va='center', color='black', fontsize=10)
+         ax.text(j + 0.15, y_pos, percentage_text, ha='left', va='center', color='black', fontsize=10, fontproperties=inter_font)
 
 # Customize plot appearance
 ax.set_yticks(y_positions)
