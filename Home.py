@@ -1,73 +1,44 @@
-import streamlit as st
 import pandas as pd
-import matplotlib.pyplot as plt
-import matplotlib.font_manager as fm
+import plotly.express as px
 
-config = {
-  'toImageButtonOptions': {
-    'format': 'svg', # one of png, svg, jpeg, webp
-    'filename': 'custom_image',
-    'height': 500,
-    'width': 900,
-    'scale': 1 # Multiply title/legend/axis/canvas sizes by this factor
-  }
-}
+# Sample data
+data = pd.DataFrame({
+    'country_code': ['USA', 'CAN', 'BRA', 'FRA', 'RUS', 'CHN', 'IND', 'AUS', 'ZAF', 'EGY'],
+    'value': [300, 150, 200, 180, 220, 400, 350, 170, 130, 120]
+})
 
-# Load the Inter font
-font_path = 'Inter-Regular.ttf'  # Update path if different
-inter_font = fm.FontProperties(fname=font_path)
+# Plotly choropleth with customizations
+fig = px.choropleth(
+    data_frame=data,
+    locations='country_code',
+    color='value',
+    hover_name='country_code',
+    hover_data={'value': True, 'country_code': False},  # show value, hide repeated code
+    color_continuous_scale='Viridis',  # Try 'Viridis', 'Cividis', 'Plasma', 'Turbo', etc.
+    projection='natural earth',
+    title='🌍 Global Data Heat Map'
+)
 
-# Define the new data based on the provided table
-data = {
-    "Sector": [
-        "Oil and Gas", "Utilities", "Industrials", "Aviation", "Marine Transportation",
-        "Land Transportation", "Consumer Goods", "Consumer Staples (Food/Household Goods etc.)", "Real Estate"
-    ],
-    "Very Unlikely": [70, 37, 59, 56, 48, 48, 29, 0, 34],
-    "Somewhat Unlikely": [23, 41, 32, 29, 38, 39, 49, 0, 47],
-    "Somewhat Likely": [5, 19, 6, 11, 8, 11, 16, 0, 14],
-    "Very Likely": [2, 3, 3, 5, 6, 3, 7, 0, 6]
-}
+# Customize color bar and layout
+fig.update_layout(
+    margin={"r":0,"t":40,"l":0,"b":0},
+    title_font_size=24,
+    title_font_family='Arial Black',
+    paper_bgcolor='#f4f4f4',
+    geo=dict(
+        showframe=False,
+        showcoastlines=True,
+        projection_type='natural earth'
+    ),
+    coloraxis_colorbar=dict(
+        title='Value',
+        title_side='right',
+        tickformat=',.0f',
+        lenmode='fraction',
+        len=0.75,
+        thickness=15
+    )
+)
 
-# Create DataFrame
-sector_df = pd.DataFrame(data)
-sector_df.set_index("Sector", inplace=True)
-
-# Define color palette for each sector
-color_discrete_sequence = [
-    '#ffc62d', '#f08900', '#000000', '#C12D8F', '#118a5e', '#00c4b3', '#aebaf0', '#7188ef', '#0f477b'
-]
-
-# Set y-axis positions for plotting, reversing order to have Oil and Gas at the top
-y_positions = [i * 2.5 for i in range(len(sector_df.index))][::-1]  # Reverse order for top-down
-
-# Create the bubble chart
-fig, ax = plt.subplots(figsize=(14, 10))
-
-for i, (sector, y_pos) in enumerate(zip(sector_df.index, y_positions)):
-    for j, category in enumerate(sector_df.columns):
-        ax.scatter(j, y_pos,
-                   s=sector_df.loc[sector, category] * 20,  # Scale for bubble size
-                   color=color_discrete_sequence[i % len(color_discrete_sequence)],  # Color for each sector
-                   alpha=1,
-                   edgecolor='black',
-                   marker='o')  # Circular marker
-
-        # Add percentage text next to each bubble
-        percentage_text = f"{sector_df.loc[sector, category]}%"
-         ax.text(j + 0.15, y_pos, percentage_text, ha='left', va='center', color='black', fontsize=10, fontproperties=inter_font)
-
-# Customize plot appearance
-ax.set_yticks(y_positions)
-ax.set_yticklabels(sector_df.index)
-ax.set_xticks(range(len(sector_df.columns)))
-ax.set_xticklabels(sector_df.columns, rotation=45, ha='center')
-ax.spines[:].set_visible(False)  # Hide all spines
-ax.grid(False)  # Turn off grid
-ax.set_xlabel("")
-ax.set_ylabel("")
-
-# Display the chart in Streamlit
-
-st.plotly_chart(fig,config=config)
+fig.show()
                           
