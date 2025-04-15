@@ -44,6 +44,11 @@ fig = px.choropleth(
     title='World Heat Map with Custom Color Stops'
 )
 
+fig.update_traces(
+    marker_line_width=0,           # Remove visible borders
+    marker_line_color='rgba(0,0,0,0)'  # Force transparent borders
+)
+
 # Hide country borders and Antarctica
 fig.update_geos(
     showcountries=True,
@@ -53,9 +58,6 @@ fig.update_geos(
     showland=True,
     landcolor="#ccc"  # Color for countries with no data
 )
-
-# Remove internal borders
-fig.update_traces(marker_line_width=0)
 
 # Layout cleanup
 fig.update_layout(
