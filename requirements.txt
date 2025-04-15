@@ -1,5 +1,0 @@
-streamlit==1.30.0
-pandas
-plotly==5.18.0
-matplotlib
-wordcloud==1.9.3
