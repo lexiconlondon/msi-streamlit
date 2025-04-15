@@ -15,10 +15,10 @@ max_val = data['value'].max()
 
 # Define 4 color stops (normalized 0.0 to 1.0)
 custom_scale = [
-    [0.0, "#d73027"],   # deep red (low)
-    [0.33, "#fdae61"],  # orange
-    [0.66, "#a6d96a"],  # light green
-    [1.0, "#1a9850"]    # dark green (high)
+    [0.0, "#00c4b3"],   # low
+    [0.33, "#aebaf0"],  #
+    [0.66, "#7188ef"],  # 
+    [1.0, "#a81476"]    # high
 ]
 
 # Choropleth with custom 4-stop scale
@@ -38,7 +38,8 @@ fig.update_geos(
     showcoastlines=True,
     lataxis_range=[-60, 90],
     showframe=False,
-    showland=True
+    showland=True,
+    bgcolor='#ccc'
 )
 
 fig.update_traces(marker_line_width=0)
