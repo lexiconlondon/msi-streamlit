@@ -26,10 +26,10 @@ max_val = data['value'].max()
 
 # Define 4 custom color stops
 custom_scale = [
-    [0.0, "#00c4b3"],
-    [0.33, "#aebaf0"],
-    [0.66, "#7188ef"],
-    [1.0, "#a81476"]
+    [0.0, "#aebaf0"],
+    [0.33, "#7188ef"],
+    [0.66, "#a81476"],
+    [1.0,"#000"]
 ]
 
 # Create the choropleth
