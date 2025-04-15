@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import plotly.express as px
+import io
 
 # Sample data
 data = pd.DataFrame({
@@ -35,7 +36,9 @@ fig = px.choropleth(
 fig.update_geos(
     showcountries=True,
     showcoastlines=True,
-    lataxis_range=[-60, 90]
+    lataxis_range=[-60, 90],
+    showframe=False,
+    showland=True
 )
 
 fig.update_traces(marker_line_width=0)
@@ -43,3 +46,13 @@ fig.update_traces(marker_line_width=0)
 fig.update_layout(margin={"r":0,"t":40,"l":0,"b":0})
 
 st.plotly_chart(fig, use_container_width=True)
+
+# Export to SVG and add download button
+buffer = io.BytesIO()
+fig.write_image(buffer, format='svg')
+st.download_button(
+    label="⬇️ Download as SVG",
+    data=buffer.getvalue(),
+    file_name="world_heatmap.svg",
+    mime="image/svg+xml"
+)
