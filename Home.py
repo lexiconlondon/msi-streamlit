@@ -44,11 +44,6 @@ fig = px.choropleth(
     title='World Heat Map with Custom Color Stops'
 )
 
-fig.update_traces(
-    marker_line_width=0,           # Remove visible borders
-    marker_line_color='rgba(0,0,0,0)'  # Force transparent borders
-)
-
 # Hide country borders and Antarctica
 fig.update_geos(
     showcountries=True,
@@ -65,6 +60,11 @@ fig.update_layout(
     plot_bgcolor='rgba(0,0,0,0)',
     margin={"r": 0, "t": 40, "l": 0, "b": 0},
     coloraxis_colorbar=dict(title='Value')
+)
+
+fig.update_traces(
+    marker_line_width=0,           # Remove visible borders
+    marker_line_color='rgba(0,0,0,0)'  # Force transparent borders
 )
 
 # Show the chart in Streamlit
