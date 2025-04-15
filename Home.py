@@ -2,8 +2,6 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 
-st.title("🌍 Global Data Heat Map")
-
 # Sample data
 data = pd.DataFrame({
     'country_code': ['BWA','MNG','POL','CYP','GNB','GMB','ZAF','BHS','IND','ATG','GUY','NER','GUM','','TLS','BRB','MDV','IDN','ERI','TCD','BGD','VUT','','SSD','KAZ','PHL','MAR','CUB','MUS','HKG','DMA','DJI','BFA','SOM','','NCL','','MTQ','CZE','IRQ','MYS','SEN','PNG','DOM','SYR','HTI','ABW','SAU','','SRB','YEM','LBY','CHN','KWT','MKD','','BEN','CPV','','ISR','','TTO','THA','TWN','GIB','TKM','MRT','BHR','DZA','QAT','SGP','IRN','OMN','TUN','BIH','UZB','AUS','WSM','JPN','','AZE','BGR','EGY','MLT','','LKA','MLI','MDG','ARG','DEU','VNM','GNQ','COG','MNE','MAC','USA','ITA','','EST','','MEX','MDA','','KOR','ARE','RUS','TGO','NGA','GRC','PYF','ROU','SUR','IRL','NLD','MMR','GHA','','TZA','GTM','BLR','GAB','LBN','PRK','BOL','LUX','SVK','PAK','HND','RWA','','SVN','HUN','BLZ','KHM','FJI','AUT','CHL','SLV','GIN','ARM','GEO','ZWE','BDI','LVA','HRV','ECU','BEL','AFG','GBR','LAO','NIC','LTU','KGZ','','CMR','SDN','AGO','BTN','','','PAN','PER','DNK','VEN','CAN','','NZL','ESP','ZMB','GRL','','KEN','TJK','SWZ','URY','PRT','MOZ','COL','FIN','','ALB','','CHE','SLE','','UGA','','BRA','MWI','','CRI','FRA','','NAM','','','NOR','ISL','','PRY','','CAF','ETH','NPL','SWE','ALA'],
@@ -33,6 +31,14 @@ fig = px.choropleth(
     projection='natural earth',
     title='World Heat Map with Custom Color Stops'
 )
+
+fig.update_geos(
+    showcountries=True,
+    showcoastlines=True,
+    lataxis_range=[-60, 90]
+)
+
+fig.update_traces(marker_line_width=0)
 
 fig.update_layout(margin={"r":0,"t":40,"l":0,"b":0})
 
