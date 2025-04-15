@@ -47,7 +47,7 @@ fig = px.choropleth(
 # Hide country borders and Antarctica
 fig.update_geos(
     showcountries=True,
-    showcoastlines=false,
+    showcoastlines=False,
     lataxis_range=[-60, 90],  # Hide Antarctica
     showframe=False,
     showland=True,
