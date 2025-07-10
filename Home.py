@@ -27,8 +27,8 @@ ax = plt.axes(projection=projection)
 ax.set_global()
 
 # Add clean map features
-ax.coastlines(resolution='110m', linewidth=0.5)
-ax.add_feature(cfeature.BORDERS, linewidth=0.4)
+# ax.coastlines(resolution='110m', linewidth=0.5)
+# ax.add_feature(cfeature.BORDERS, linewidth=0.4)
 
 # ------------------------------
 # Load country polygons
