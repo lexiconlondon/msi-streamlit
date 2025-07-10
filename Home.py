@@ -95,6 +95,7 @@ for country in shpreader.Reader(countries_shp).records():
 for _, row in df.iterrows():
  # Set minimum line thickness
     linewidth = max(row["Credits"] / 1_000_000, 0.5)
+    markersize = max(row["Credits"] / 1_000_000, 3)
 
     # Draw line from Brazil to destination
     ax.plot([BRAZIL_LON, row["Lon"]],
@@ -108,7 +109,7 @@ for _, row in df.iterrows():
     ax.plot(row["Lon"], row["Lat"],
             marker='o',
             color='#0f477b',
-            markersize=4,
+            markersize=markersize,
             transform=ccrs.PlateCarree())
 
 # Plot Brazil point
