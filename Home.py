@@ -122,3 +122,14 @@ ax.plot(BRAZIL_LON, BRAZIL_LAT, marker='o', color='darkgreen', markersize=10, tr
 # Streamlit output
 #st.title("Global Retirements of Brazilian NBS Credits")
 st.pyplot(fig)
+
+svg_buf = BytesIO()
+fig.savefig(svg_buf, format="svg", bbox_inches="tight")
+svg_buf.seek(0)
+
+st.download_button(
+    label="Download as vector (SVG)",
+    data=svg_buf,
+    file_name="brazil_nbs_map.svg",
+    mime="image/svg+xml"
+)
