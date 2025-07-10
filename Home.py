@@ -18,11 +18,16 @@ BRAZIL_LAT = -14.2350
 BRAZIL_LON = -51.9253
 
 # Set up map
-fig = plt.figure(figsize=(24, 16))
-ax = plt.axes(projection=ccrs.Mercator())
+# Define a Mercator projection with a sensible latitude limit
+mercator_proj = ccrs.Mercator(min_latitude=-60, max_latitude=85)
+
+fig = plt.figure(figsize=(12, 10))
+ax = plt.axes(projection=mercator_proj)
+
+# Set extent (longitude range still PlateCarree, latitude matches above)
+ax.set_extent([-180, 180, -60, 85], crs=ccrs.PlateCarree())
 
 ax.set_global()
-ax.set_extent([-180, 180, -60, 90], crs=ccrs.PlateCarree())
 ax.coastlines(linewidth=0.5)
 ax.add_feature(cfeature.BORDERS, linewidth=0.4)
 
