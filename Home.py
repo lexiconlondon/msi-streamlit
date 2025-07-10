@@ -19,7 +19,7 @@ BRAZIL_LON = -51.9253
 
 # Set up map
 fig = plt.figure(figsize=(12, 8))
-ax = plt.axes(projection=ccrs.PlateCarree())
+ax = plt.axes(projection=ccrs.Mercator())
 
 ax.set_global()
 ax.set_extent([-180, 180, -60, 90], crs=ccrs.PlateCarree())  # Removes Antarctica
