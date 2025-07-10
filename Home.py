@@ -104,8 +104,8 @@ for _, row in df.iterrows():
     ax.plot([BRAZIL_LON, row["Lon"]],
             [BRAZIL_LAT, row["Lat"]],
             color='#00c4b3',
-            linewidth=linewidth + 1,
-            alpha=0.7,
+            linewidth=linewidth + 1.5,
+            alpha=0.5,
             transform=ccrs.PlateCarree())
 
     # Draw destination dot
