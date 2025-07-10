@@ -24,11 +24,11 @@ fig = plt.figure(figsize=(12, 8))
 ax = plt.axes(projection=ccrs.PlateCarree())
 
 ax.set_global()
-ax.stock_img()
-ax.coastlines()
-ax.add_feature(cfeature.BORDERS, linestyle=':')
-ax.add_feature(cfeature.LAND, facecolor='lightgray')
-ax.add_feature(cfeature.OCEAN, facecolor='aliceblue')
+ax.coastlines(linewidth=0.5)
+ax.add_feature(cfeature.BORDERS, linewidth=0.4)
+ax.add_feature(cfeature.LAND, facecolor='#eeeeee')
+ax.background_patch.set_visible(False)
+ax.outline_patch.set_visible(False)
 
 # Plot lines from Brazil to destinations
 for _, row in df.iterrows():
