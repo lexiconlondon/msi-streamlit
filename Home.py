@@ -18,11 +18,11 @@ BRAZIL_LAT = -14.2350
 BRAZIL_LON = -51.9253
 
 # Set up map
-fig = plt.figure(figsize=(12, 8))
+fig = plt.figure(figsize=(24, 16))
 ax = plt.axes(projection=ccrs.Mercator())
 
 ax.set_global()
-ax.set_extent([-180, 180, -60, 90], crs=ccrs.PlateCarree())  # Removes Antarctica
+ax.set_extent([-180, 180, -60, 90], crs=ccrs.PlateCarree())
 ax.coastlines(linewidth=0.5)
 ax.add_feature(cfeature.BORDERS, linewidth=0.4)
 
