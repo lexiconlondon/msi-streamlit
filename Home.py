@@ -61,7 +61,7 @@ BRAZIL_LON = -49.55945
 
 # ------------------------------
 # Set up map
-fig = plt.figure(figsize=(18, 10))
+fig = plt.figure(figsize=(28, 16))
 projection = ccrs.Robinson()
 ax = plt.axes(projection=projection)
 ax.set_global()
@@ -118,5 +118,5 @@ ax.plot(BRAZIL_LON, BRAZIL_LAT, marker='o', color='darkgreen', markersize=10, tr
 
 # ------------------------------
 # Streamlit output
-st.title("Global Retirements of Brazilian NBS Credits")
+#st.title("Global Retirements of Brazilian NBS Credits")
 st.pyplot(fig)
