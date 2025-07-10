@@ -24,10 +24,9 @@ BRAZIL_LON = -51.9253
 fig = plt.figure(figsize=(18, 10))
 projection = ccrs.Robinson()
 ax = plt.axes(projection=projection)
-ax.set_global()
 
-# Remove map border
-ax.outline_patch.set_visible(False)
+ax.set_global()
+ax.outline_patch.set_visible(False) 
 
 # Add clean map features
 # ax.coastlines(resolution='110m', linewidth=0.5)
