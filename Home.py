@@ -87,7 +87,7 @@ for country in shpreader.Reader(countries_shp).records():
         continue
     try:
         color = "#7188ef" if name in destination_names else "#f4f5fd"
-        ax.add_geometries([geom], ccrs.PlateCarree(), facecolor=color, edgecolor="gray", linewidth=0.2)
+        ax.add_geometries([geom], ccrs.PlateCarree(), facecolor=color, edgecolor="#000000", linewidth=0.2)
     except:
         continue
 
@@ -95,7 +95,7 @@ for country in shpreader.Reader(countries_shp).records():
 for _, row in df.iterrows():
  # Set minimum line thickness
     linewidth = max(row["Credits"] / 1_000_000, 0.5)
-    markersize = max(row["Credits"] / 1_000_000, 3)
+    markersize = max(row["Credits"] / 1_000_000, 5)
 
     # Draw line from Brazil to destination
     ax.plot([BRAZIL_LON, row["Lon"]],
