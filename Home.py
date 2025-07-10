@@ -20,7 +20,7 @@ BRAZIL_LON = -51.9253
 # Set up taller map with Mercator projection
 fig = plt.figure(figsize=(18, 10))
 
-projection = ccrs.Robinson(min_latitude=-60, max_latitude=85)
+projection = ccrs.Robinson()
 ax = plt.axes(projection=projection)
 ax.set_global()
 
