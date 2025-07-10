@@ -26,7 +26,7 @@ projection = ccrs.Mercator(min_latitude=-60, max_latitude=85)
 ax = plt.axes(projection=projection)
 
 # Limit map view to exclude Antarctica and extreme poles
-ax.set_extent([-180, 180, -60, 85], crs=ccrs.PlateCarree())
+ax.set_extent([-180, 180, -60, 85], crs=projection)
 
 # Add map features
 ax.coastlines(linewidth=0.5)
