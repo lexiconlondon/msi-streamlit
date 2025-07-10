@@ -26,7 +26,10 @@ projection = ccrs.Robinson()
 ax = plt.axes(projection=projection)
 
 ax.set_global()
-ax.outline_patch.set_visible(False) 
+
+# Remove outer border
+for spine in ax.spines.values():
+    spine.set_visible(False)
 
 # Add clean map features
 # ax.coastlines(resolution='110m', linewidth=0.5)
