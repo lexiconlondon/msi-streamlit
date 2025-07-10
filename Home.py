@@ -5,7 +5,8 @@ import cartopy.crs as ccrs
 import cartopy.feature as cfeature
 import cartopy.io.shapereader as shpreader
 
-# Sample data — replace with your actual values
+# ------------------------------
+# Sample data — replace with actual values
 df = pd.DataFrame({
     'Country': ['United States', 'France', 'Germany'],
     'Lat': [37.0902, 46.2276, 51.1657],
@@ -13,56 +14,59 @@ df = pd.DataFrame({
     'Credits': [3000000, 2000000, 1000000]
 })
 
-# Brazil coordinates (origin)
+df = df.dropna(subset=['Country', 'Lat', 'Lon', 'Credits'])
+
 BRAZIL_LAT = -14.2350
 BRAZIL_LON = -51.9253
 
-# Set up taller map with Mercator projection
+# ------------------------------
+# Use Robinson projection
 fig = plt.figure(figsize=(18, 10))
-
 projection = ccrs.Robinson()
 ax = plt.axes(projection=projection)
 ax.set_global()
 
 # Add clean map features
-ax.coastlines(linewidth=0.5)
+ax.coastlines(resolution='110m', linewidth=0.5)
 ax.add_feature(cfeature.BORDERS, linewidth=0.4)
 
+# ------------------------------
 # Load country polygons
 shapename = 'admin_0_countries'
-countries_shp = shpreader.natural_earth(resolution='110m',
-                                        category='cultural',
-                                        name=shapename)
-
-# List of destination countries to highlight
+countries_shp = shpreader.natural_earth(resolution='110m', category='cultural', name=shapename)
 destination_names = set(df['Country'])
 
-# Draw countries
 for country in shpreader.Reader(countries_shp).records():
     name = country.attributes['NAME_LONG']
     geom = country.geometry
 
-    # Shade linked countries
-    if name in destination_names:
-        ax.add_geometries([geom], ccrs.PlateCarree(),
-                          facecolor='#cc0033', edgecolor='black', linewidth=0.2)
-    else:
-        ax.add_geometries([geom], ccrs.PlateCarree(),
-                          facecolor='#eeeeee', edgecolor='gray', linewidth=0.2)
+    # Skip Antarctica and empty shapes
+    if name == 'Antarctica' or geom is None or geom.is_empty:
+        continue
 
-# Draw lines from Brazil to destinations
+    try:
+        color = '#cc0033' if name in destination_names else '#eeeeee'
+        ax.add_geometries([geom], ccrs.PlateCarree(),
+                          facecolor=color, edgecolor='gray', linewidth=0.2)
+    except Exception as e:
+        print(f"Skipping {name}: {e}")
+
+# ------------------------------
+# Plot flow lines
 for _, row in df.iterrows():
-    if pd.notna(row['Lat']) and pd.notna(row['Lon']):
-        ax.plot([BRAZIL_LON, row['Lon']],
-                [BRAZIL_LAT, row['Lat']],
-                color='green',
-                linewidth=row['Credits'] / 1e6,  # Adjust line width scale
-                alpha=0.7,
-                transform=ccrs.Geodetic())
+    ax.plot([BRAZIL_LON, row['Lon']],
+            [BRAZIL_LAT, row['Lat']],
+            color='green',
+            linewidth=row['Credits'] / 1e6,
+            alpha=0.7,
+            transform=ccrs.Geodetic())
 
-# Plot Brazil origin point
-ax.plot(BRAZIL_LON, BRAZIL_LAT, marker='o', color='darkgreen', markersize=10, transform=ccrs.PlateCarree())
+# Plot Brazil
+ax.plot(BRAZIL_LON, BRAZIL_LAT,
+        marker='o', color='darkgreen', markersize=10,
+        transform=ccrs.PlateCarree())
 
-# Display the map in Streamlit
-st.title("Brazilian NBS Credit Flows")
+# ------------------------------
+# Show in Streamlit
+st.title("Brazilian NBS Credit Flows (Robinson Projection)")
 st.pyplot(fig)
