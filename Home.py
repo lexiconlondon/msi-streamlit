@@ -96,7 +96,7 @@ for _, row in df.iterrows():
     ax.plot([BRAZIL_LON, row["Lon"]],
             [BRAZIL_LAT, row["Lat"]],
             color='#00c4b3',
-            linewidth=row["Credits"] / 100_000,
+            linewidth=max(row["Credits"] / 1_000_000, 0.5),
             alpha=0.8,
             transform=ccrs.PlateCarree())
 
