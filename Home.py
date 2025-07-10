@@ -97,7 +97,7 @@ for country in shpreader.Reader(countries_shp).records():
 # Plot flow lines
 for _, row in df.iterrows():
  # Set minimum line thickness
-    linewidth = max(row["Credits"] / 1_000_000, 0.5)
+    linewidth = max(row["Credits"] / 500_000, 0.5)
     markersize = max(row["Credits"] / 1_000_000, 5)
 
     # Draw line from Brazil to destination
