@@ -86,8 +86,8 @@ for country in shpreader.Reader(countries_shp).records():
     if name == "Antarctica" or geom is None or geom.is_empty:
         continue
     try:
-        color = "#7188ef" if name in destination_names else "#f4f5fd"
-        ax.add_geometries([geom], ccrs.PlateCarree(), facecolor=color, edgecolor="#000000", linewidth=0.2)
+        color = "#aebaf0" if name in destination_names else "#f4f5fd"
+        ax.add_geometries([geom], ccrs.PlateCarree(), facecolor=color, edgecolor="#ffffff", linewidth=0.2)
     except:
         continue
 
