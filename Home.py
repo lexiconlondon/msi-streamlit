@@ -59,6 +59,8 @@ df = df.dropna(subset=["Lat", "Lon", "Credits"])
 BRAZIL_LAT = -12.098687
 BRAZIL_LON = -49.55945
 
+st.set_page_config(layout="wide")
+
 # ------------------------------
 # Set up map
 fig = plt.figure(figsize=(28, 16))
