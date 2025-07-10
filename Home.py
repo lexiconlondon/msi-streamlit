@@ -97,7 +97,7 @@ for _, row in df.iterrows():
             [BRAZIL_LAT, row["Lat"]],
             color='#00c4b3',
             linewidth=row["Credits"] / 100_000,
-            alpha=0.8,
+            alpha=0.8)
             #transform=ccrs.Geodetic())
 
 # Plot Brazil point
