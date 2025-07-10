@@ -95,10 +95,10 @@ for country in shpreader.Reader(countries_shp).records():
 for _, row in df.iterrows():
     ax.plot([BRAZIL_LON, row["Lon"]],
             [BRAZIL_LAT, row["Lat"]],
-            color='green',
-            linewidth=row["Credits"] / 1_000_000,
-            alpha=0.7,
-            transform=ccrs.Geodetic())
+            color='#00c4b3',
+            linewidth=row["Credits"] / 100_000,
+            alpha=0.8,
+            #transform=ccrs.Geodetic())
 
 # Plot Brazil point
 ax.plot(BRAZIL_LON, BRAZIL_LAT, marker='o', color='darkgreen', markersize=10, transform=ccrs.PlateCarree())
