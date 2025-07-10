@@ -106,11 +106,11 @@ for _, row in df.iterrows():
             transform=ccrs.PlateCarree())
 
     # Draw destination dot
-    ax.plot(row["Lon"], row["Lat"],
-            marker='o',
-            color='#0f477b',
-            markersize=markersize,
-            transform=ccrs.PlateCarree())
+    ax.scatter(row["Lon"], row["Lat"],
+           color='#0f477b',
+           s=max(row["Credits"] / 1000, 20),  # 's' is marker area in points^2
+           transform=ccrs.PlateCarree(),
+           zorder=5)
 
 # Plot Brazil point
 ax.plot(BRAZIL_LON, BRAZIL_LAT, marker='o', color='darkgreen', markersize=10, transform=ccrs.PlateCarree())
