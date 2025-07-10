@@ -93,11 +93,22 @@ for country in shpreader.Reader(countries_shp).records():
 
 # Plot flow lines
 for _, row in df.iterrows():
+ # Set minimum line thickness
+    linewidth = max(row["Credits"] / 1_000_000, 0.5)
+
+    # Draw line from Brazil to destination
     ax.plot([BRAZIL_LON, row["Lon"]],
             [BRAZIL_LAT, row["Lat"]],
             color='#00c4b3',
-            linewidth=max(row["Credits"] / 1_000_000, 0.5),
-            alpha=0.8,
+            linewidth=linewidth,
+            alpha=0.7,
+            transform=ccrs.PlateCarree())
+
+    # Draw destination dot
+    ax.plot(row["Lon"], row["Lat"],
+            marker='o',
+            color='#0f477b',
+            markersize=4,
             transform=ccrs.PlateCarree())
 
 # Plot Brazil point
