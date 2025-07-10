@@ -108,7 +108,8 @@ for _, row in df.iterrows():
     # Draw destination dot
     ax.scatter(row["Lon"], row["Lat"],
            color='#0f477b',
-           s=max(row["Credits"] / 1000, 20),  # 's' is marker area in points^2
+           alpha=0.4,
+           s=max(row["Credits"] / 1000, 10),  # 's' is marker area in points^2
            transform=ccrs.PlateCarree(),
            zorder=5)
 
