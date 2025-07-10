@@ -18,7 +18,7 @@ BRAZIL_LAT = -14.2350
 BRAZIL_LON = -51.9253
 
 # Set up taller map with Mercator projection
-fig = plt.figure(figsize=(24, 16))
+fig = plt.figure(figsize=(12, 10))
 projection = ccrs.Mercator(min_latitude=-60, max_latitude=85)
 ax = plt.axes(projection=projection)
 
