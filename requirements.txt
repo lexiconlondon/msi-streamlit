@@ -4,3 +4,4 @@ plotly
 kaleido
 pycountry
 geopandas
+matplotlib
