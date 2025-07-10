@@ -7,4 +7,3 @@ geopandas
 matplotlib
 cartopy
 geopy
-bytesio
