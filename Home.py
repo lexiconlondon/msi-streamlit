@@ -71,7 +71,7 @@ for spine in ax.spines.values():
     spine.set_visible(False)
 
 # Add base map features
-ax.coastlines(resolution='110m', linewidth=0.5)
+ax.coastlines(resolution='110m', linewidth=0)
 ax.add_feature(cfeature.BORDERS, linewidth=0.4)
 
 # Load world country shapes
