@@ -23,17 +23,12 @@ st.title("Brazilian NBS Credit Retirements (Flow Map)")
 fig = plt.figure(figsize=(12, 8))
 ax = plt.axes(projection=ccrs.PlateCarree())
 
-# Global extent and basic features
 ax.set_global()
+ax.set_extent([-180, 180, -60, 90], crs=ccrs.PlateCarree())  # Removes Antarctica
+
 ax.coastlines(linewidth=0.5)
 ax.add_feature(cfeature.BORDERS, linewidth=0.4)
 ax.add_feature(cfeature.LAND, facecolor='#eeeeee')  # Light gray land
-
-# Do NOT add:
-# - ax.stock_img()
-# - ax.background_patch
-# - ax.outline_patch
-# - cfeature.OCEAN
 
 # Plot lines from Brazil to destinations
 for _, row in df.iterrows():
